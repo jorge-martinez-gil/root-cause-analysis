@@ -1,0 +1,4 @@
+Life_expectation(?p) ^ hasValue(?p,?val) ^ swrlb:lesserThan(?val,0.5^^xsd:float) → Failure(?p)
+Life_expectation(?p) ^ hasValue(?p,?val) ^ swrlb:greaterThan(?val,0.5^^xsd:float) → NonFailure(?p)
+Life_expectation(?p) ^ hasValue(?p,?val) ^ swrlb:greaterThan(?val,0.5^^xsd:float) ^ Nitrogen(?p) ^ hasLevel(?p,?level) ^ swrlb:greaterThan(?level,62651.0^^xsd:float) → Failure(?p)
+
