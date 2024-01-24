@@ -1,4 +1,4 @@
-# 🌐 Root Cause Analysis in the Industrial Domain using Knowledge Graphs: A Case Study on Power Transformers 🌟
+# 🌐 Root Cause Analysis in the Industrial Domain using Knowledge Graphs: A Case Study on Power Transformers
 
 [![DOI:10.1016/j.procs.2022.01.304](https://img.shields.io/badge/DOI-10.1016%2Fj.procs.2022.01.304-blue.svg)](https://doi.org/10.1016/j.procs.2022.01.304)
 
