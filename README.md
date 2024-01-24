@@ -54,7 +54,7 @@ Ensures that specific classes like DBDS, Power_factor, etc., are recognized as d
 The ontology is structured to represent transformers and their properties, including various gas types and measurements. It allows linking specific transformer instances with their properties, such as water content. This ontology aids operators in the industrial domain, particularly in power transformer fault analysis, by providing a structured framework for reasoning, failure classification, and querying.
 
 ### Additional Notes
-- The ontology is designed for extensibility and adaptability to various industrial scenarios. 🌟
+The ontology is designed for extensibility and adaptability to various industrial scenarios. 🌟
 
 ## 📈 Classification
 
