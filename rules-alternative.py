@@ -17,7 +17,7 @@ def main() -> None:
         class NonFailure(Transformer):
             pass
 
-        class hasOxigen(DataProperty, FunctionalProperty):
+        class hasOxygen(DataProperty, FunctionalProperty):
             domain = [Transformer]
             range = [float]
 
@@ -26,21 +26,21 @@ def main() -> None:
             range = [float]
 
         transformer_1 = Transformer("PW101")
-        transformer_1.hasOxigen = 0.4
+        transformer_1.hasOxygen = 0.4
         transformer_1.hasNitrogen = 1.4
         transformer_2 = Transformer("PW102")
-        transformer_2.hasOxigen = 0.6
+        transformer_2.hasOxygen = 0.6
         transformer_3 = Transformer("PW103")
-        transformer_3.hasOxigen = 0.7
+        transformer_3.hasOxygen = 0.7
         transformer_3.hasNitrogen = 70000
 
     for transformer in Transformer.instances():
-        if transformer.hasOxigen < 0.5:
+        if transformer.hasOxygen < 0.5:
             transformer.is_a.append(Failure)
-        elif transformer.hasOxigen > 0.5:
+        elif transformer.hasOxygen > 0.5:
             transformer.is_a.append(NonFailure)
         if (
-            transformer.hasOxigen > 0.5
+            transformer.hasOxygen > 0.5
             and transformer.hasNitrogen is not None
             and transformer.hasNitrogen > 62651
         ):
