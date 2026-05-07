@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+title: "Root Cause Analysis in the Industrial Domain using Knowledge Graphs"
+message: "If you use this repository, please cite the associated publication."
+type: software
+authors:
+  - family-names: Martinez-Gil
+    given-names: Jorge
+  - family-names: Buchgeher
+    given-names: Georg
+  - family-names: Gabauer
+    given-names: David
+  - family-names: Freudenthaler
+    given-names: Bernhard
+  - family-names: Filipiak
+    given-names: Dominik
+  - family-names: Fensel
+    given-names: Anna
+repository-code: "https://github.com/jorge-martinez-gil/root-cause-analysis"
+license: MIT
+preferred-citation:
+  type: article
+  title: "Root Cause Analysis in the Industrial Domain using Knowledge Graphs: A Case Study on Power Transformers"
+  authors:
+    - family-names: Martinez-Gil
+      given-names: Jorge
+    - family-names: Buchgeher
+      given-names: Georg
+    - family-names: Gabauer
+      given-names: David
+    - family-names: Freudenthaler
+      given-names: Bernhard
+    - family-names: Filipiak
+      given-names: Dominik
+    - family-names: Fensel
+      given-names: Anna
+  journal: "Procedia Computer Science"
+  year: 2022
+  volume: 200
+  start: 944
+  end: 953
+  doi: "10.1016/j.procs.2022.01.304"

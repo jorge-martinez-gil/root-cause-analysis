@@ -1,57 +1,54 @@
-# -*- coding: utf-8 -*-
-"""
-Example of classification using SWRL rules. Alternative when SWRL is not accepted in the reasoner
+"""Alternative script for reasoners that do not execute SWRL rules directly."""
 
-Martinez-Gil, J., Buchgeher, G., Gabauer, D., Freudenthaler, B., Filipiak, D., & Fensel, A. (2022). Root cause analysis in the industrial domain using knowledge graphs: A case study on power transformers. Procedia Computer Science, 200, 944-953.
+from owlready2 import DataProperty, FunctionalProperty, Thing, get_ontology
 
-@author: Jorge Martinez-Gil
-"""
 
-from owlready2 import *
+def main() -> None:
+    onto = get_ontology("http://test.org/onto.owl")
 
-# Create a new ontology
-onto = get_ontology("http://test.org/onto.owl")
+    with onto:
 
-with onto:
-    # Define classes
-    class Transformer(Thing):
-        pass
+        class Transformer(Thing):
+            pass
 
-    class Failure(Transformer):
-        pass
+        class Failure(Transformer):
+            pass
 
-    class NonFailure(Transformer):
-        pass
+        class NonFailure(Transformer):
+            pass
 
-    # Define properties
-    class hasOxigen(DataProperty, FunctionalProperty):
-        domain = [Transformer]
-        range = [float]
+        class hasOxygen(DataProperty, FunctionalProperty):
+            domain = [Transformer]
+            range = [float]
 
-    class hasNitrogen(DataProperty, FunctionalProperty):
-        domain = [Transformer]
-        range = [float]
+        class hasNitrogen(DataProperty, FunctionalProperty):
+            domain = [Transformer]
+            range = [float]
 
-    # Create individuals (example data)
-    p1 = Transformer("PW101")
-    p1.hasOxigen = 0.4
-    p1.hasNitrogen = 1.4
-    p2 = Transformer("PW102")
-    p2.hasOxigen = 0.6
-    p3 = Transformer("PW103")
-    p3.hasOxigen = 0.7
-    p3.hasNitrogen = 70000  # Nitrogen level
+        transformer_1 = Transformer("PW101")
+        transformer_1.hasOxygen = 0.4
+        transformer_1.hasNitrogen = 1.4
+        transformer_2 = Transformer("PW102")
+        transformer_2.hasOxygen = 0.6
+        transformer_3 = Transformer("PW103")
+        transformer_3.hasOxygen = 0.7
+        transformer_3.hasNitrogen = 70000
 
-# Implement the logic of the SWRL rules in Python 
-# This code is needed when the reasoner cannot operate SWRL rules directly
-for transformer in Transformer.instances():
-    if transformer.hasOxigen < 0.5:
-        transformer.is_a.append(Failure)
-    elif transformer.hasOxigen > 0.5:
-        transformer.is_a.append(NonFailure)
-    if transformer.hasOxigen > 0.5 and transformer.hasNitrogen is not None and transformer.hasNitrogen > 62651:
-        transformer.is_a.append(Failure)
+    for transformer in Transformer.instances():
+        if transformer.hasOxygen < 0.5:
+            transformer.is_a.append(Failure)
+        elif transformer.hasOxygen > 0.5:
+            transformer.is_a.append(NonFailure)
+        if (
+            transformer.hasOxygen > 0.5
+            and transformer.hasNitrogen is not None
+            and transformer.hasNitrogen > 62651
+        ):
+            transformer.is_a.append(Failure)
 
-# Example: Checking which individuals are instances of Failure
-failures = list(Failure.instances())
-print("Failures:", [i.name for i in failures])
+    failures = [instance.name for instance in Failure.instances()]
+    print("Failures:", failures)
+
+
+if __name__ == "__main__":
+    main()
