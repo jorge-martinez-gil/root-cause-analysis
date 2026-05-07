@@ -1,4 +1,4 @@
-"""Legacy script: classify transformer records according to threshold rules."""
+"""Minimal quickstart example for repository users."""
 
 from root_cause_analysis.classification import (
     classify_transformers,
