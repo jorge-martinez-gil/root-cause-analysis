@@ -1,6 +1,5 @@
 # Root Cause Analysis in the Industrial Domain using Knowledge Graphs
 
-[![CI](https://github.com/jorge-martinez-gil/root-cause-analysis/actions/workflows/ci.yml/badge.svg)](https://github.com/jorge-martinez-gil/root-cause-analysis/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![DOI:10.1016/j.procs.2022.01.304](https://img.shields.io/badge/DOI-10.1016%2Fj.procs.2022.01.304-blue.svg)](https://doi.org/10.1016/j.procs.2022.01.304)
@@ -86,10 +85,18 @@ pytest
 
 ## Citation
 
-Please cite both the paper and this software metadata:
-
-- Paper DOI: https://doi.org/10.1016/j.procs.2022.01.304
-- Repository citation file: [`CITATION.cff`](CITATION.cff)
+Please cite the paper if you find it useful:
+```
+@article{martinez2022root,
+  title={Root cause analysis in the industrial domain using knowledge graphs: a case study on power transformers},
+  author={Martinez-Gil, Jorge and Buchgeher, Georg and Gabauer, David and Freudenthaler, Bernhard and Filipiak, Dominik and Fensel, Anna},
+  journal={Procedia Computer Science},
+  volume={200},
+  pages={944--953},
+  year={2022},
+  publisher={Elsevier}
+}
+```
 
 ## Roadmap
 
