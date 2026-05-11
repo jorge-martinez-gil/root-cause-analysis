@@ -2,7 +2,9 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
-[![DOI:10.1016/j.procs.2022.01.304](https://img.shields.io/badge/DOI-10.1016%2Fj.procs.2022.01.304-blue.svg)](https://doi.org/10.1016/j.procs.2022.01.304)
+[![DOI:10.1016/j.procs.2022.01.292](https://img.shields.io/badge/DOI-10.1016%2Fj.procs.2022.01.292-blue.svg)](https://doi.org/10.1016/j.procs.2022.01.292)
+
+https://doi.org/10.1016/j.procs.2022.01.292
 
 Research software accompanying:
 **Martinez-Gil et al. (2022), _Root Cause Analysis in the Industrial Domain using Knowledge Graphs: A Case Study on Power Transformers_.**
