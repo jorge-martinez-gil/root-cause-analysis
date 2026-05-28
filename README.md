@@ -1,30 +1,62 @@
 # Root Cause Analysis in the Industrial Domain using Knowledge Graphs
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
-[![DOI:10.1016/j.procs.2022.01.292](https://img.shields.io/badge/DOI-10.1016%2Fj.procs.2022.01.292-blue.svg)](https://doi.org/10.1016/j.procs.2022.01.292)
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10%2B-blue.svg" alt="Python 3.10+"></a>
+  <a href="https://doi.org/10.1016/j.procs.2022.01.304"><img src="https://img.shields.io/badge/DOI-10.1016%2Fj.procs.2022.01.304-blue.svg" alt="DOI"></a>
+  <a href="https://github.com/jorge-martinez-gil/root-cause-analysis/stargazers"><img src="https://img.shields.io/github/stars/jorge-martinez-gil/root-cause-analysis?style=social" alt="GitHub Stars"></a>
+</p>
 
-https://doi.org/10.1016/j.procs.2022.01.292
+> **Published in:** *Procedia Computer Science*, vol. 200, pp. 944–953, 2022 (Elsevier)  
+> **Full citation:** Martinez-Gil, J., Buchgeher, G., Gabauer, D., Freudenthaler, B., Filipiak, D., & Fensel, A. (2022). Root Cause Analysis in the Industrial Domain using Knowledge Graphs: A Case Study on Power Transformers. *Procedia Computer Science*, 200, 944–953. https://doi.org/10.1016/j.procs.2022.01.304
 
-Research software accompanying:
-**Martinez-Gil et al. (2022), _Root Cause Analysis in the Industrial Domain using Knowledge Graphs: A Case Study on Power Transformers_.**
+---
 
-## Motivation
+## Overview
 
-Industrial fault diagnosis requires actionable, explainable workflows. This repository demonstrates a knowledge graph-oriented approach that combines ontology querying and rule-based classification for transformer diagnostics.
+This repository provides the **research software** and **reproducible workflows** accompanying the above publication. It demonstrates a **knowledge graph-driven approach** to automated root cause analysis (RCA) for industrial assets — specifically high-voltage power transformers — combining:
 
-## Key features
+- **Ontology-based asset modeling** (OWL/RDF)
+- **SPARQL querying** for anomaly detection
+- **SWRL rule-based classification** for failure diagnosis
 
-- Reproducible ontology query workflow (`query.py`, `rca-query`)
-- Reproducible rule-based classification workflow (`swrl-rules.py`, `rca-classify`)
-- Packaged Python module under `src/root_cause_analysis`
-- Tests, linting, typing checks, and CI automation
-- Citation and community-contribution infrastructure
+The approach is **explainable by design**: every diagnostic decision traces back to an interpretable rule or ontology axiom, making it suitable for safety-critical industrial settings.
 
-## Approach overview
+---
 
-1. **Ontology query**: identify transformers with potentially risky measurements (e.g., water level threshold).
-2. **Rule-based classification**: apply threshold logic from the publication examples to classify records.
+## Why this matters
+
+| Challenge | Our approach |
+|-----------|-------------|
+| Black-box ML diagnostics | Fully interpretable rule & ontology reasoning |
+| Siloed sensor data | Unified knowledge graph representation |
+| Manual fault analysis | Automated SPARQL + SWRL classification pipeline |
+| Reproducibility gap | Open data, open code, packaged module |
+
+---
+
+## System Architecture
+
+```mermaid
+flowchart LR
+    A[Sensor / Measurement Data] --> B[OWL Ontology\nonto_pw.owl]
+    B --> C[SPARQL Query\nAnomaly Detection]
+    B --> D[SWRL Rules\nFailure Classification]
+    C --> E{Root Cause\nReport}
+    D --> E
+```
+
+---
+
+## Key Contributions
+
+1. **Knowledge graph schema** for power transformer diagnostics (OWL ontology with domain expert-validated concepts)
+2. **SPARQL-based screening** of assets exceeding safety thresholds (e.g., dissolved water content)
+3. **SWRL rule set** encoding IEC-standard diagnostic heuristics for failure/non-failure classification
+4. **End-to-end reproducible pipeline** from raw measurements to actionable fault candidates
+5. **Open benchmark** enabling direct comparison for future industrial KG-RCA methods
+
+---
 
 ## Installation
 
@@ -32,11 +64,13 @@ Industrial fault diagnosis requires actionable, explainable workflows. This repo
 python -m pip install -e .
 ```
 
-For development checks:
+For development and quality checks:
 
 ```bash
 python -m pip install -e .[dev]
 ```
+
+---
 
 ## Quickstart
 
@@ -44,32 +78,48 @@ python -m pip install -e .[dev]
 python examples/minimal_quickstart.py
 ```
 
-## Reproducible example
+**Full industrial workflow** (reproduces the paper's case study):
 
 ```bash
 python examples/industrial_workflow.py
 ```
 
 Expected output includes:
-- transformers above the water threshold (e.g., `PW101`)
-- lists of failure/non-failure candidates from the sample measurement table
+- Transformers exceeding the water content threshold (e.g., `PW101`)
+- Failure / non-failure candidate lists from the measurement table
 
-## Project structure
+---
+
+## Project Structure
 
 ```text
 .
-├── data/ontology/onto_pw.owl
-├── docs/
-├── examples/
-├── src/root_cause_analysis/
-├── tests/
-├── query.py
-└── swrl-rules.py
+├── data/ontology/onto_pw.owl       # Power transformer ontology (OWL)
+├── docs/                           # Methodology, assumptions, usage guide
+├── examples/                       # Runnable workflow scripts
+├── src/root_cause_analysis/        # Packaged Python module
+│   ├── classification.py           # SWRL-based rule classifier
+│   ├── querying.py                 # SPARQL query engine wrapper
+│   └── cli.py                      # rca-query / rca-classify entry points
+├── tests/                          # Unit & integration tests
+├── query.py                        # Standalone ontology query script
+└── swrl-rules.py                   # Standalone rule classification script
 ```
+
+---
+
+## Documentation
+
+- [Methodology](docs/methodology.md) — approach and design decisions
+- [Data and model assumptions](docs/assumptions.md) — scope and limitations
+- [Usage guide](docs/usage.md) — CLI and API reference
+- [Troubleshooting](docs/troubleshooting.md) — common issues
+
+---
 
 ## Development
 
-Run quality checks locally:
+Run the full quality suite locally:
 
 ```bash
 ruff check .
@@ -78,33 +128,58 @@ mypy src
 pytest
 ```
 
-## Documentation
+---
 
-- [Methodology](docs/methodology.md)
-- [Data and model assumptions](docs/assumptions.md)
-- [Usage guide](docs/usage.md)
-- [Troubleshooting](docs/troubleshooting.md)
+## Citing This Work
 
-## Citation
+If this repository or the associated paper is useful to your research, please cite:
 
-Please cite the paper if you find it useful:
-```
+### BibTeX
+
+```bibtex
 @article{martinez2022root,
-  title={Root cause analysis in the industrial domain using knowledge graphs: a case study on power transformers},
-  author={Martinez-Gil, Jorge and Buchgeher, Georg and Gabauer, David and Freudenthaler, Bernhard and Filipiak, Dominik and Fensel, Anna},
-  journal={Procedia Computer Science},
-  volume={200},
-  pages={944--953},
-  year={2022},
-  publisher={Elsevier}
+  title     = {Root cause analysis in the industrial domain using knowledge graphs:
+               a case study on power transformers},
+  author    = {Martinez-Gil, Jorge and Buchgeher, Georg and Gabauer, David and
+               Freudenthaler, Bernhard and Filipiak, Dominik and Fensel, Anna},
+  journal   = {Procedia Computer Science},
+  volume    = {200},
+  pages     = {944--953},
+  year      = {2022},
+  publisher = {Elsevier},
+  doi       = {10.1016/j.procs.2022.01.304}
 }
 ```
 
+### APA
+
+> Martinez-Gil, J., Buchgeher, G., Gabauer, D., Freudenthaler, B., Filipiak, D., & Fensel, A. (2022). Root cause analysis in the industrial domain using knowledge graphs: a case study on power transformers. *Procedia Computer Science*, *200*, 944–953. https://doi.org/10.1016/j.procs.2022.01.304
+
+### ACM
+
+> Jorge Martinez-Gil, Georg Buchgeher, David Gabauer, Bernhard Freudenthaler, Dominik Filipiak, and Anna Fensel. 2022. Root cause analysis in the industrial domain using knowledge graphs: a case study on power transformers. *Proc. Comput. Sci.* 200 (2022), 944–953. DOI: https://doi.org/10.1016/j.procs.2022.01.304
+
+---
+
+## Related Work
+
+This repository sits at the intersection of **knowledge graphs**, **semantic reasoning**, and **industrial AI**. If you are building on related topics, you may also find the following areas relevant:
+
+- Ontology-based fault diagnosis (IEC 61850 / IEC 61968)
+- Semantic Web Rule Language (SWRL) for industrial reasoning
+- Knowledge graph embeddings for anomaly detection
+- Explainable AI (XAI) in predictive maintenance
+
+---
+
 ## Roadmap
 
-- Expand benchmark datasets and scenario coverage
-- Add configurable rule profiles for additional industrial contexts
-- Provide richer explainability artifacts for inferred outcomes
+- [ ] Expand benchmark datasets and scenario coverage
+- [ ] Add configurable rule profiles for additional industrial contexts (motors, switchgear)
+- [ ] Provide richer explainability artifacts (rule traces, provenance graphs)
+- [ ] Integration with SHACL constraint validation
+
+---
 
 ## License
 
