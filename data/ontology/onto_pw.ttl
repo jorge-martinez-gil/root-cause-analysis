@@ -1,0 +1,328 @@
+@prefix : <http://test.org/onto-pw#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://test.org/onto-pw> a owl:Ontology ;
+    rdfs:label "Power Transformer Root Cause Analysis Ontology" ;
+    rdfs:comment "Modular ontology for explainable, knowledge-graph-based root cause analysis of power transformers. Fault taxonomy follows IEC 60599; provenance follows W3C PROV-O." .
+
+:Acetylene a owl:Class ;
+    rdfs:label "Acetylene" ;
+    rdfs:comment "Dissolved fault gas: Acetylene." ;
+    rdfs:subClassOf :Gas .
+
+:CO a owl:Class ;
+    rdfs:label "CO" ;
+    rdfs:comment "Dissolved fault gas: CO." ;
+    rdfs:subClassOf :Gas .
+
+:CO2 a owl:Class ;
+    rdfs:label "CO2" ;
+    rdfs:comment "Dissolved fault gas: CO2." ;
+    rdfs:subClassOf :Gas .
+
+:DBDS a owl:Class ;
+    rdfs:label "DBDS" ;
+    rdfs:comment "Measured property: DBDS." ;
+    rdfs:subClassOf :MeasuredProperty .
+
+:DGAMeasurement a owl:Class ;
+    rdfs:label "DGA measurement" ;
+    rdfs:comment "A dissolved-gas-analysis measurement (gas concentration in oil)." ;
+    rdfs:subClassOf :Measurement .
+
+:Dielectric_rigidity a owl:Class ;
+    rdfs:label "Dielectric rigidity" ;
+    rdfs:comment "Measured property: Dielectric rigidity." ;
+    rdfs:subClassOf :MeasuredProperty .
+
+:Ethane a owl:Class ;
+    rdfs:label "Ethane" ;
+    rdfs:comment "Dissolved fault gas: Ethane." ;
+    rdfs:subClassOf :Gas .
+
+:Ethylene a owl:Class ;
+    rdfs:label "Ethylene" ;
+    rdfs:comment "Dissolved fault gas: Ethylene." ;
+    rdfs:subClassOf :Gas .
+
+:Health_index a owl:Class ;
+    rdfs:label "Health index" ;
+    rdfs:comment "Measured property: Health index." ;
+    rdfs:subClassOf :MeasuredProperty .
+
+:HighEnergyDischarge a owl:Class ;
+    rdfs:label "Discharges of high energy (arcing)" ;
+    :faultCode "D2" ;
+    rdfs:comment "Discharges of high energy (arcing)" ;
+    rdfs:subClassOf :Fault .
+
+:Hydrogen a owl:Class ;
+    rdfs:label "Hydrogen" ;
+    rdfs:comment "Dissolved fault gas: Hydrogen." ;
+    rdfs:subClassOf :Gas .
+
+:Interfacial_V a owl:Class ;
+    rdfs:label "Interfacial tension" ;
+    rdfs:comment "Measured property: Interfacial tension." ;
+    rdfs:subClassOf :MeasuredProperty .
+
+:Life_expectation a owl:Class ;
+    rdfs:label "Life expectation" ;
+    rdfs:comment "Measured property: Life expectation." ;
+    rdfs:subClassOf :MeasuredProperty .
+
+:LowEnergyDischarge a owl:Class ;
+    rdfs:label "Discharges of low energy (sparking / partial arcing)" ;
+    :faultCode "D1" ;
+    rdfs:comment "Discharges of low energy (sparking / partial arcing)" ;
+    rdfs:subClassOf :Fault .
+
+:Methane a owl:Class ;
+    rdfs:label "Methane" ;
+    rdfs:comment "Dissolved fault gas: Methane." ;
+    rdfs:subClassOf :Gas .
+
+:Nitrogen a owl:Class ;
+    rdfs:label "Nitrogen" ;
+    rdfs:comment "Dissolved fault gas: Nitrogen." ;
+    rdfs:subClassOf :Gas .
+
+:OilQualityMeasurement a owl:Class ;
+    rdfs:label "Oil-quality measurement" ;
+    rdfs:comment "An insulating-oil quality measurement (e.g. moisture, breakdown voltage)." ;
+    rdfs:subClassOf :Measurement .
+
+:OperatingCondition a owl:Class ;
+    rdfs:label "Operating condition" ;
+    rdfs:comment "Context describing how the asset is being operated (e.g. loading)." .
+
+:Oxygen a owl:Class ;
+    rdfs:label "Oxygen" ;
+    rdfs:comment "Dissolved fault gas: Oxygen." ;
+    rdfs:subClassOf :Gas .
+
+:PartialDischarge a owl:Class ;
+    rdfs:label "Partial discharges" ;
+    :faultCode "PD" ;
+    rdfs:comment "Partial discharges" ;
+    rdfs:subClassOf :Fault .
+
+:Power_factor a owl:Class ;
+    rdfs:label "Power factor" ;
+    rdfs:comment "Measured property: Power factor." ;
+    rdfs:subClassOf :MeasuredProperty .
+
+:Sensor a owl:Class ;
+    rdfs:label "Sensor" ;
+    rdfs:comment "A device that produces measurements of an asset." .
+
+:ThermalFaultHigh a owl:Class ;
+    rdfs:label "Thermal fault, t > 700 °C" ;
+    :faultCode "T3" ;
+    rdfs:comment "Thermal fault, t > 700 °C" ;
+    rdfs:subClassOf :Fault .
+
+:ThermalFaultLow a owl:Class ;
+    rdfs:label "Thermal fault, t < 300 °C" ;
+    :faultCode "T1" ;
+    rdfs:comment "Thermal fault, t < 300 °C" ;
+    rdfs:subClassOf :Fault .
+
+:ThermalFaultMedium a owl:Class ;
+    rdfs:label "Thermal fault, 300 °C ≤ t ≤ 700 °C" ;
+    :faultCode "T2" ;
+    rdfs:comment "Thermal fault, 300 °C ≤ t ≤ 700 °C" ;
+    rdfs:subClassOf :Fault .
+
+:derivedFromRule a owl:ObjectProperty ;
+    rdfs:label "derived from rule" ;
+    rdfs:comment "Links a diagnosis to the diagnostic rule that produced it." ;
+    rdfs:domain :Diagnosis ;
+    rdfs:range :DiagnosticRule .
+
+:faultCode a owl:DatatypeProperty ;
+    rdfs:label "fault code" ;
+    rdfs:comment "IEC 60599 fault code (PD, D1, D2, T1, T2, T3)." ;
+    rdfs:domain :Fault ;
+    rdfs:range xsd:string .
+
+:hasComponent a owl:ObjectProperty ;
+    rdfs:label "has component" ;
+    rdfs:comment "Links an asset to its components." ;
+    rdfs:domain :Asset ;
+    rdfs:range :Component .
+
+:hasDiagnosis a owl:ObjectProperty ;
+    rdfs:label "has diagnosis" ;
+    rdfs:comment "Links an asset to an inferred diagnosis." ;
+    rdfs:domain :Asset ;
+    rdfs:range :Diagnosis .
+
+:hasEffect a owl:ObjectProperty ;
+    rdfs:label "has effect" ;
+    rdfs:comment "Links a fault to one of its effects." ;
+    rdfs:domain :Fault ;
+    rdfs:range :Effect .
+
+:hasExplanation a owl:DatatypeProperty ;
+    rdfs:label "has explanation" ;
+    rdfs:comment "Human-readable explanation trace for a diagnosis." ;
+    rdfs:domain :Diagnosis ;
+    rdfs:range xsd:string .
+
+:hasMeasurement a owl:ObjectProperty ;
+    rdfs:label "has measurement" ;
+    rdfs:comment "Links an asset to a measurement observed on it." ;
+    rdfs:domain :Asset ;
+    rdfs:range :Measurement .
+
+:hasRootCause a owl:ObjectProperty ;
+    rdfs:label "has root cause" ;
+    rdfs:comment "Links a diagnosis or fault to its root cause." ;
+    rdfs:domain :Diagnosis ;
+    rdfs:range :Cause .
+
+:hasSeverity a owl:DatatypeProperty ;
+    rdfs:label "has severity" ;
+    rdfs:comment "Severity ranking of a fault/diagnosis." ;
+    rdfs:domain :Diagnosis ;
+    rdfs:range xsd:string .
+
+:hasStatus a owl:DatatypeProperty ;
+    rdfs:label "has status" ;
+    rdfs:comment "Overall diagnostic status of the asset." ;
+    rdfs:domain :Diagnosis ;
+    rdfs:range xsd:string .
+
+:hasSymptom a owl:ObjectProperty ;
+    rdfs:label "has symptom" ;
+    rdfs:comment "Links an asset to an observed symptom." ;
+    rdfs:domain :Asset ;
+    rdfs:range :Symptom .
+
+:hasUnit a owl:DatatypeProperty ;
+    rdfs:label "has unit" ;
+    rdfs:comment "Unit of measure for a value." ;
+    rdfs:domain :Measurement ;
+    rdfs:range xsd:string .
+
+:hasValue a owl:DatatypeProperty ;
+    rdfs:label "has value" ;
+    rdfs:comment "Numeric value of a measurement or evidence item." ;
+    rdfs:domain :Measurement ;
+    rdfs:range xsd:double .
+
+:hasWaterLevel a owl:DatatypeProperty ;
+    rdfs:label "has water level" ;
+    rdfs:comment "Water content level of a measurement." ;
+    rdfs:domain :Water_content ;
+    rdfs:range xsd:double .
+
+:indicatesFault a owl:ObjectProperty ;
+    rdfs:label "indicates fault" ;
+    rdfs:comment "Links a diagnosis to the fault it identifies." ;
+    rdfs:domain :Diagnosis ;
+    rdfs:range :Fault .
+
+:observedProperty a owl:ObjectProperty ;
+    rdfs:label "observed property" ;
+    rdfs:comment "The measured property that a measurement observes." ;
+    rdfs:domain :Measurement ;
+    rdfs:range :MeasuredProperty .
+
+:ofAsset a owl:ObjectProperty ;
+    rdfs:label "of asset" ;
+    rdfs:comment "The asset a diagnosis refers to." ;
+    rdfs:domain :Diagnosis ;
+    rdfs:range :Asset .
+
+:recommendsAction a owl:ObjectProperty ;
+    rdfs:label "recommends action" ;
+    rdfs:comment "Links a diagnosis to a recommended maintenance action." ;
+    rdfs:domain :Diagnosis ;
+    rdfs:range :MaintenanceAction .
+
+:relatesToWaterContent a owl:ObjectProperty ;
+    rdfs:label "relates to water content" ;
+    rdfs:comment "Links a transformer to its water-content measurement." ;
+    rdfs:domain :Transformer ;
+    rdfs:range :Water_content .
+
+:relatesWaterContentToMeasurement a owl:ObjectProperty ;
+    rdfs:label "relates water content to measurement" ;
+    rdfs:comment "Links a water-content property to its measurement." ;
+    rdfs:domain :Water_content ;
+    rdfs:range :Measurement .
+
+:supportedByEvidence a owl:ObjectProperty ;
+    rdfs:label "supported by evidence" ;
+    rdfs:comment "Links a diagnosis to a supporting piece of evidence." ;
+    rdfs:domain :Diagnosis ;
+    rdfs:range :Evidence .
+
+:Cause a owl:Class ;
+    rdfs:label "Cause" ;
+    rdfs:comment "A root cause that explains one or more faults." .
+
+:Component a owl:Class ;
+    rdfs:label "Component" ;
+    rdfs:comment "A constituent component of an asset." ;
+    rdfs:subClassOf :Asset .
+
+:DiagnosticRule a owl:Class ;
+    rdfs:label "Diagnostic rule" ;
+    rdfs:comment "A documented rule whose application produces diagnoses." .
+
+:Effect a owl:Class ;
+    rdfs:label "Effect" ;
+    rdfs:comment "A consequence or effect produced by a fault." .
+
+:Evidence a owl:Class ;
+    rdfs:label "Evidence" ;
+    rdfs:comment "An auditable piece of evidence (parameter, value, threshold) for a rule." .
+
+:MaintenanceAction a owl:Class ;
+    rdfs:label "Maintenance action" ;
+    rdfs:comment "A recommended maintenance or inspection action." .
+
+:Symptom a owl:Class ;
+    rdfs:label "Symptom" ;
+    rdfs:comment "An observable abnormal condition derived from measurements." .
+
+:Transformer a owl:Class ;
+    rdfs:label "Transformer" ;
+    rdfs:comment "A high-voltage power transformer (specialisation of Asset)." ;
+    rdfs:subClassOf :Asset .
+
+:Water_content a owl:Class ;
+    rdfs:label "Water content" ;
+    rdfs:comment "Measured property: Water content." ;
+    rdfs:subClassOf :MeasuredProperty .
+
+:Asset a owl:Class ;
+    rdfs:label "Asset" ;
+    rdfs:comment "A physical industrial asset under diagnosis." .
+
+:Measurement a owl:Class ;
+    rdfs:label "Measurement" ;
+    rdfs:comment "An observed quantitative value for a monitored parameter." .
+
+:Fault a owl:Class ;
+    rdfs:label "Fault" ;
+    rdfs:comment "An incipient or active fault condition affecting an asset." .
+
+:Gas a owl:Class ;
+    rdfs:label "Gas" ;
+    rdfs:comment "A fault gas dissolved in transformer oil." ;
+    rdfs:subClassOf :MeasuredProperty .
+
+:MeasuredProperty a owl:Class ;
+    rdfs:label "Measured property" ;
+    rdfs:comment "A monitored physical/chemical property that a measurement observes." .
+
+:Diagnosis a owl:Class ;
+    rdfs:label "Diagnosis" ;
+    rdfs:comment "An inferred diagnostic conclusion for an asset, with explanation trace." .
+

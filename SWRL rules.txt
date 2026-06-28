@@ -1,4 +1,10 @@
-Life_expectation(?p) ^ hasValue(?p,?val) ^ swrlb:lesserThan(?val,0.5^^xsd:float) → Failure(?p)
-Life_expectation(?p) ^ hasValue(?p,?val) ^ swrlb:greaterThan(?val,0.5^^xsd:float) → NonFailure(?p)
-Life_expectation(?p) ^ hasValue(?p,?val) ^ swrlb:greaterThan(?val,0.5^^xsd:float) ^ Nitrogen(?p) ^ hasLevel(?p,?level) ^ swrlb:greaterThan(?level,62651.0^^xsd:float) → Failure(?p)
+This file is retained for backward compatibility only.
 
+The canonical, implementation-consistent rule set now lives in:
+
+    data/rules/swrl_rules.md
+
+It documents (a) the IEC 60599 / IEEE C57.104 dissolved-gas ratio method used
+for root-cause classification and (b) the advisory oil-quality / health
+screening rules, together with their SWRL serialisations where applicable.
+The executable implementation is in src/root_cause_analysis/rules.py.

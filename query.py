@@ -1,18 +1,21 @@
-"""Legacy script: query transformers with high water content."""
+"""Deprecated shim. Use ``rca-query`` or ``root_cause_analysis.screen_assets``.
 
-from pathlib import Path
+Kept for backward compatibility; screens the built-in sample assets by health
+index and prints the flagged asset labels.
+"""
 
-from root_cause_analysis.querying import query_transformers_by_water_level
+from root_cause_analysis import sample_transformer_measurements, screen_assets
 
 
 def main() -> None:
-    candidates = [
-        Path("data/ontology/onto_pw.owl"),
-        Path("onto_pw"),
-    ]
-    ontology_path = next((path for path in candidates if path.exists()), candidates[0])
-    for transformer_iri in query_transformers_by_water_level(ontology_path):
-        print(transformer_iri)
+    print("[deprecated] use 'rca-query' or root_cause_analysis.screen_assets")
+    for label, value in screen_assets(
+        sample_transformer_measurements(),
+        parameter="Health index",
+        operator="<",
+        threshold=80.0,
+    ):
+        print(f"{label}: Health index = {value:g}")
 
 
 if __name__ == "__main__":

@@ -1,12 +1,10 @@
-"""Legacy script: classify transformer records according to threshold rules."""
+"""Deprecated shim. Use ``rca-diagnose`` or ``root_cause_analysis.diagnose``."""
 
-from root_cause_analysis.classification import (
-    classify_transformers,
-    default_transformer_measurements,
-)
+from root_cause_analysis import classify_transformers, default_transformer_measurements
 
 
 def main() -> None:
+    print("[deprecated] use 'rca-diagnose' or root_cause_analysis.diagnose")
     result = classify_transformers(default_transformer_measurements())
     print("Failures:", result.failures)
     print("NonFailures:", result.non_failures)

@@ -7,16 +7,23 @@ Install the project in editable mode:
 python -m pip install -e .
 ```
 
-## Query returns no results
-- Verify ontology path exists.
-- Lower threshold, e.g. `--min-water-level 50`.
-
-## Lint/type/test checks
-Run:
+## `rca-diagnose: command not found`
+Reinstall so the console scripts are registered, and ensure your environment's
+`Scripts`/`bin` directory is on `PATH`:
 
 ```bash
-ruff check .
-ruff format --check .
-mypy src
-pytest
+python -m pip install -e .
+```
+
+## A diagnosis comes back as `ND (indeterminate)`
+The dissolved-gas ratios did not match a single IEC 60599 case (possible mixed faults or boundary values).
+This is reported honestly rather than guessed; resample and re-evaluate.
+
+## Screening returns no results
+Lower the threshold or pick a different parameter, e.g.
+`rca-query --parameter "Dielectric rigidity" --operator "<" --threshold 45`.
+
+## Quality checks
+```bash
+ruff check . && ruff format --check . && mypy src && pytest
 ```

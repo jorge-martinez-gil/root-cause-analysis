@@ -1,53 +1,19 @@
-"""Alternative script for reasoners that do not execute SWRL rules directly."""
+"""Deprecated shim.
 
-from owlready2 import DataProperty, FunctionalProperty, Thing, get_ontology
+The original ad-hoc ``owlready2`` reimplementation has been superseded by the
+standards-grounded engine in :mod:`root_cause_analysis.reasoning`. This wrapper
+remains so existing commands keep working; it prints explanation traces for the
+built-in sample assets.
+"""
+
+from root_cause_analysis import diagnose, sample_transformer_measurements
 
 
 def main() -> None:
-    onto = get_ontology("http://test.org/onto.owl")
-
-    with onto:
-
-        class Transformer(Thing):
-            pass
-
-        class Failure(Transformer):
-            pass
-
-        class NonFailure(Transformer):
-            pass
-
-        class hasOxygen(DataProperty, FunctionalProperty):
-            domain = [Transformer]
-            range = [float]
-
-        class hasNitrogen(DataProperty, FunctionalProperty):
-            domain = [Transformer]
-            range = [float]
-
-        transformer_1 = Transformer("PW101")
-        transformer_1.hasOxygen = 0.4
-        transformer_1.hasNitrogen = 1.4
-        transformer_2 = Transformer("PW102")
-        transformer_2.hasOxygen = 0.6
-        transformer_3 = Transformer("PW103")
-        transformer_3.hasOxygen = 0.7
-        transformer_3.hasNitrogen = 70000
-
-    for transformer in Transformer.instances():
-        if transformer.hasOxygen < 0.5:
-            transformer.is_a.append(Failure)
-        elif transformer.hasOxygen > 0.5:
-            transformer.is_a.append(NonFailure)
-        if (
-            transformer.hasOxygen > 0.5
-            and transformer.hasNitrogen is not None
-            and transformer.hasNitrogen > 62651
-        ):
-            transformer.is_a.append(Failure)
-
-    failures = [instance.name for instance in Failure.instances()]
-    print("Failures:", failures)
+    print("[deprecated] use 'rca-diagnose' or root_cause_analysis.diagnose")
+    for diag in diagnose(sample_transformer_measurements()):
+        print(diag.explanation())
+        print()
 
 
 if __name__ == "__main__":

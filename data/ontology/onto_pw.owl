@@ -1,140 +1,331 @@
-<?xml version="1.0"?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-         xmlns:owl="http://www.w3.org/2002/07/owl#"
-         xml:base="http://test.org/onto-pw"
-         xmlns="http://test.org/onto-pw#"
-         xmlns:swrl="http://www.w3.org/2003/11/swrl#">
-
-    <owl:Ontology rdf:about="http://test.org/onto-pw"/>
-
-    <owl:ObjectProperty rdf:about="#is">
-        <rdfs:label>is</rdfs:label>
-    </owl:ObjectProperty>
-
-    <!-- Specific object properties for various relationships -->
-    <owl:ObjectProperty rdf:about="#relatesWaterContentToMeasurement">
-        <rdfs:domain rdf:resource="#Water_content"/>
-        <rdfs:range rdf:resource="#Measurement"/>
-        <rdfs:label>relates water content to measurement</rdfs:label>
-    </owl:ObjectProperty>
-	
-	<!-- Assuming you have a DatatypeProperty for water level -->
-    <owl:DatatypeProperty rdf:about="#hasWaterLevel">
-        <rdfs:domain rdf:resource="#Water_content"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
-    </owl:DatatypeProperty>
-    <!-- Additional object properties follow a similar pattern -->
-
-    <!-- Class definitions for Transformer and its properties -->
-    <owl:Class rdf:about="#Transformer">
-        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-    </owl:Class>
-
-    <owl:Class rdf:about="#Gas">
-        <rdfs:subClassOf rdf:resource="#Transformer"/>
-    </owl:Class>
-
-    <!-- Properties as subclasses of Transformer -->
-    <owl:Class rdf:about="#DBDS">
-        <rdfs:subClassOf rdf:resource="#Transformer"/>
-    </owl:Class>
-    <owl:Class rdf:about="#Power_factor">
-        <rdfs:subClassOf rdf:resource="#Transformer"/>
-    </owl:Class>
-    <owl:Class rdf:about="#Interfacial_V">
-        <rdfs:subClassOf rdf:resource="#Transformer"/>
-    </owl:Class>
-    <owl:Class rdf:about="#Dielectric_rigidity">
-        <rdfs:subClassOf rdf:resource="#Transformer"/>
-    </owl:Class>
-    <owl:Class rdf:about="#Water_content">
-        <rdfs:subClassOf rdf:resource="#Transformer"/>
-    </owl:Class>
-    <owl:Class rdf:about="#Health_index">
-        <rdfs:subClassOf rdf:resource="#Transformer"/>
-    </owl:Class>
-    <owl:Class rdf:about="#Life_expectation">
-        <rdfs:subClassOf rdf:resource="#Transformer"/>
-    </owl:Class>
-
-    <!-- General classes like Property, Estimation, Measurement -->
-    <owl:Class rdf:about="#Property">
-        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-    </owl:Class>
-    <owl:Class rdf:about="#Estimation">
-        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-    </owl:Class>
-    <owl:Class rdf:about="#Measurement">
-        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-    </owl:Class>
-
-    <!-- Gas types as subclasses of Gas -->
-    <owl:Class rdf:about="#Hydrogen">
-        <rdfs:subClassOf rdf:resource="#Gas"/>
-    </owl:Class>
-    <owl:Class rdf:about="#Oxygen">
-        <rdfs:subClassOf rdf:resource="#Gas"/>
-    </owl:Class>
-    <owl:Class rdf:about="#Nitrogen">
-        <rdfs:subClassOf rdf:resource="#Gas"/>
-    </owl:Class>
-    <owl:Class rdf:about="#Methane">
-        <rdfs:subClassOf rdf:resource="#Gas"/>
-    </owl:Class>
-    <owl:Class rdf:about="#CO">
-        <rdfs:subClassOf rdf:resource="#Gas"/>
-    </owl:Class>
-    <owl:Class rdf:about="#CO2">
-        <rdfs:subClassOf rdf:resource="#Gas"/>
-    </owl:Class>
-    <owl:Class rdf:about="#Ethylene">
-        <rdfs:subClassOf rdf:resource="#Gas"/>
-    </owl:Class>
-    <owl:Class rdf:about="#Ethane">
-        <rdfs:subClassOf rdf:resource="#Gas"/>
-    </owl:Class>
-    <owl:Class rdf:about="#Acetylene">
-        <rdfs:subClassOf rdf:resource="#Gas"/>
-    </owl:Class>
-
-    <!-- AllDifferent declaration to distinguish certain classes -->
-    <owl:AllDifferent>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="#DBDS"/>
-            <rdf:Description rdf:about="#Power_factor"/>
-            <rdf:Description rdf:about="#Interfacial_V"/>
-            <rdf:Description rdf:about="#Dielectric_rigidity"/>
-            <!-- Additional distinct members can be added here -->
-        </owl:distinctMembers>
-    </owl:AllDifferent>
-
-	<!-- Instance PW101 which is a Transformer with water level 105 -->
-	<owl:NamedIndividual rdf:about="#PW101">
-		<rdf:type rdf:resource="#Transformer"/>
-		<!-- Assuming you have an object property that links Transformer to Water_content -->
-		<relatesToWaterContent rdf:resource="#WaterContent_PW101"/>
-	</owl:NamedIndividual>
-
-	<!-- Water content associated with PW101 -->
-	<owl:NamedIndividual rdf:about="#WaterContent_PW101">
-		<rdf:type rdf:resource="#Water_content"/>
-		<hasWaterLevel rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">105</hasWaterLevel>
-	</owl:NamedIndividual>
-
-	<!-- Instance PW102 which is a Transformer with water level 56 -->
-	<owl:NamedIndividual rdf:about="#PW102">
-		<rdf:type rdf:resource="#Transformer"/>
-		<!-- Assuming you have an object property that links Transformer to Water_content -->
-		<relatesToWaterContent rdf:resource="#WaterContent_PW102"/>
-	</owl:NamedIndividual>
-
-	<!-- Water content associated with PW102 -->
-	<owl:NamedIndividual rdf:about="#WaterContent_PW102">
-		<rdf:type rdf:resource="#Water_content"/>
-		<hasWaterLevel rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">56</hasWaterLevel>
-	</owl:NamedIndividual>
-
-
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns="http://test.org/onto-pw#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+>
+  <owl:Class rdf:about="http://test.org/onto-pw#Hydrogen">
+    <rdfs:label>Hydrogen</rdfs:label>
+    <rdfs:comment>Dissolved fault gas: Hydrogen.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#Gas"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#Power_factor">
+    <rdfs:label>Power factor</rdfs:label>
+    <rdfs:comment>Measured property: Power factor.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#MeasuredProperty"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#Nitrogen">
+    <rdfs:label>Nitrogen</rdfs:label>
+    <rdfs:comment>Dissolved fault gas: Nitrogen.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#Gas"/>
+  </owl:Class>
+  <owl:DatatypeProperty rdf:about="http://test.org/onto-pw#hasStatus">
+    <rdfs:label>has status</rdfs:label>
+    <rdfs:comment>Overall diagnostic status of the asset.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://test.org/onto-pw#Diagnosis"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://test.org/onto-pw#hasExplanation">
+    <rdfs:label>has explanation</rdfs:label>
+    <rdfs:comment>Human-readable explanation trace for a diagnosis.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://test.org/onto-pw#Diagnosis"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:Class rdf:about="http://test.org/onto-pw#Interfacial_V">
+    <rdfs:label>Interfacial tension</rdfs:label>
+    <rdfs:comment>Measured property: Interfacial tension.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#MeasuredProperty"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#DBDS">
+    <rdfs:label>DBDS</rdfs:label>
+    <rdfs:comment>Measured property: DBDS.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#MeasuredProperty"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="http://test.org/onto-pw#indicatesFault">
+    <rdfs:label>indicates fault</rdfs:label>
+    <rdfs:comment>Links a diagnosis to the fault it identifies.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://test.org/onto-pw#Diagnosis"/>
+    <rdfs:range rdf:resource="http://test.org/onto-pw#Fault"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://test.org/onto-pw#hasUnit">
+    <rdfs:label>has unit</rdfs:label>
+    <rdfs:comment>Unit of measure for a value.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://test.org/onto-pw#Measurement"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:Class rdf:about="http://test.org/onto-pw#ThermalFaultMedium">
+    <rdfs:label>Thermal fault, 300 °C ≤ t ≤ 700 °C</rdfs:label>
+    <rdfs:comment>Thermal fault, 300 °C ≤ t ≤ 700 °C</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#Fault"/>
+    <faultCode>T2</faultCode>
+  </owl:Class>
+  <owl:DatatypeProperty rdf:about="http://test.org/onto-pw#hasSeverity">
+    <rdfs:label>has severity</rdfs:label>
+    <rdfs:comment>Severity ranking of a fault/diagnosis.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://test.org/onto-pw#Diagnosis"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:Class rdf:about="http://test.org/onto-pw#Sensor">
+    <rdfs:label>Sensor</rdfs:label>
+    <rdfs:comment>A device that produces measurements of an asset.</rdfs:comment>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="http://test.org/onto-pw#relatesToWaterContent">
+    <rdfs:label>relates to water content</rdfs:label>
+    <rdfs:comment>Links a transformer to its water-content measurement.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://test.org/onto-pw#Transformer"/>
+    <rdfs:range rdf:resource="http://test.org/onto-pw#Water_content"/>
+  </owl:ObjectProperty>
+  <owl:Class rdf:about="http://test.org/onto-pw#PartialDischarge">
+    <rdfs:label>Partial discharges</rdfs:label>
+    <rdfs:comment>Partial discharges</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#Fault"/>
+    <faultCode>PD</faultCode>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#DGAMeasurement">
+    <rdfs:label>DGA measurement</rdfs:label>
+    <rdfs:comment>A dissolved-gas-analysis measurement (gas concentration in oil).</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#Measurement"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="http://test.org/onto-pw#hasRootCause">
+    <rdfs:label>has root cause</rdfs:label>
+    <rdfs:comment>Links a diagnosis or fault to its root cause.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://test.org/onto-pw#Diagnosis"/>
+    <rdfs:range rdf:resource="http://test.org/onto-pw#Cause"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://test.org/onto-pw#recommendsAction">
+    <rdfs:label>recommends action</rdfs:label>
+    <rdfs:comment>Links a diagnosis to a recommended maintenance action.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://test.org/onto-pw#Diagnosis"/>
+    <rdfs:range rdf:resource="http://test.org/onto-pw#MaintenanceAction"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://test.org/onto-pw#hasComponent">
+    <rdfs:label>has component</rdfs:label>
+    <rdfs:comment>Links an asset to its components.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://test.org/onto-pw#Asset"/>
+    <rdfs:range rdf:resource="http://test.org/onto-pw#Component"/>
+  </owl:ObjectProperty>
+  <owl:Class rdf:about="http://test.org/onto-pw#OperatingCondition">
+    <rdfs:label>Operating condition</rdfs:label>
+    <rdfs:comment>Context describing how the asset is being operated (e.g. loading).</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#Ethane">
+    <rdfs:label>Ethane</rdfs:label>
+    <rdfs:comment>Dissolved fault gas: Ethane.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#Gas"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#Health_index">
+    <rdfs:label>Health index</rdfs:label>
+    <rdfs:comment>Measured property: Health index.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#MeasuredProperty"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#Ethylene">
+    <rdfs:label>Ethylene</rdfs:label>
+    <rdfs:comment>Dissolved fault gas: Ethylene.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#Gas"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#Life_expectation">
+    <rdfs:label>Life expectation</rdfs:label>
+    <rdfs:comment>Measured property: Life expectation.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#MeasuredProperty"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="http://test.org/onto-pw#observedProperty">
+    <rdfs:label>observed property</rdfs:label>
+    <rdfs:comment>The measured property that a measurement observes.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://test.org/onto-pw#Measurement"/>
+    <rdfs:range rdf:resource="http://test.org/onto-pw#MeasuredProperty"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://test.org/onto-pw#hasValue">
+    <rdfs:label>has value</rdfs:label>
+    <rdfs:comment>Numeric value of a measurement or evidence item.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://test.org/onto-pw#Measurement"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+  </owl:DatatypeProperty>
+  <owl:Class rdf:about="http://test.org/onto-pw#CO2">
+    <rdfs:label>CO2</rdfs:label>
+    <rdfs:comment>Dissolved fault gas: CO2.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#Gas"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#OilQualityMeasurement">
+    <rdfs:label>Oil-quality measurement</rdfs:label>
+    <rdfs:comment>An insulating-oil quality measurement (e.g. moisture, breakdown voltage).</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#Measurement"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="http://test.org/onto-pw#hasEffect">
+    <rdfs:label>has effect</rdfs:label>
+    <rdfs:comment>Links a fault to one of its effects.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://test.org/onto-pw#Fault"/>
+    <rdfs:range rdf:resource="http://test.org/onto-pw#Effect"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://test.org/onto-pw#ofAsset">
+    <rdfs:label>of asset</rdfs:label>
+    <rdfs:comment>The asset a diagnosis refers to.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://test.org/onto-pw#Diagnosis"/>
+    <rdfs:range rdf:resource="http://test.org/onto-pw#Asset"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://test.org/onto-pw#hasWaterLevel">
+    <rdfs:label>has water level</rdfs:label>
+    <rdfs:comment>Water content level of a measurement.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://test.org/onto-pw#Water_content"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+  </owl:DatatypeProperty>
+  <owl:Ontology rdf:about="http://test.org/onto-pw">
+    <rdfs:label>Power Transformer Root Cause Analysis Ontology</rdfs:label>
+    <rdfs:comment>Modular ontology for explainable, knowledge-graph-based root cause analysis of power transformers. Fault taxonomy follows IEC 60599; provenance follows W3C PROV-O.</rdfs:comment>
+  </owl:Ontology>
+  <owl:ObjectProperty rdf:about="http://test.org/onto-pw#supportedByEvidence">
+    <rdfs:label>supported by evidence</rdfs:label>
+    <rdfs:comment>Links a diagnosis to a supporting piece of evidence.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://test.org/onto-pw#Diagnosis"/>
+    <rdfs:range rdf:resource="http://test.org/onto-pw#Evidence"/>
+  </owl:ObjectProperty>
+  <owl:Class rdf:about="http://test.org/onto-pw#Acetylene">
+    <rdfs:label>Acetylene</rdfs:label>
+    <rdfs:comment>Dissolved fault gas: Acetylene.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#Gas"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#Oxygen">
+    <rdfs:label>Oxygen</rdfs:label>
+    <rdfs:comment>Dissolved fault gas: Oxygen.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#Gas"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#LowEnergyDischarge">
+    <rdfs:label>Discharges of low energy (sparking / partial arcing)</rdfs:label>
+    <rdfs:comment>Discharges of low energy (sparking / partial arcing)</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#Fault"/>
+    <faultCode>D1</faultCode>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="http://test.org/onto-pw#hasMeasurement">
+    <rdfs:label>has measurement</rdfs:label>
+    <rdfs:comment>Links an asset to a measurement observed on it.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://test.org/onto-pw#Asset"/>
+    <rdfs:range rdf:resource="http://test.org/onto-pw#Measurement"/>
+  </owl:ObjectProperty>
+  <owl:Class rdf:about="http://test.org/onto-pw#CO">
+    <rdfs:label>CO</rdfs:label>
+    <rdfs:comment>Dissolved fault gas: CO.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#Gas"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="http://test.org/onto-pw#hasDiagnosis">
+    <rdfs:label>has diagnosis</rdfs:label>
+    <rdfs:comment>Links an asset to an inferred diagnosis.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://test.org/onto-pw#Asset"/>
+    <rdfs:range rdf:resource="http://test.org/onto-pw#Diagnosis"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://test.org/onto-pw#derivedFromRule">
+    <rdfs:label>derived from rule</rdfs:label>
+    <rdfs:comment>Links a diagnosis to the diagnostic rule that produced it.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://test.org/onto-pw#Diagnosis"/>
+    <rdfs:range rdf:resource="http://test.org/onto-pw#DiagnosticRule"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://test.org/onto-pw#faultCode">
+    <rdfs:label>fault code</rdfs:label>
+    <rdfs:comment>IEC 60599 fault code (PD, D1, D2, T1, T2, T3).</rdfs:comment>
+    <rdfs:domain rdf:resource="http://test.org/onto-pw#Fault"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:Class rdf:about="http://test.org/onto-pw#HighEnergyDischarge">
+    <rdfs:label>Discharges of high energy (arcing)</rdfs:label>
+    <rdfs:comment>Discharges of high energy (arcing)</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#Fault"/>
+    <faultCode>D2</faultCode>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#ThermalFaultLow">
+    <rdfs:label>Thermal fault, t &lt; 300 °C</rdfs:label>
+    <rdfs:comment>Thermal fault, t &lt; 300 °C</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#Fault"/>
+    <faultCode>T1</faultCode>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#Methane">
+    <rdfs:label>Methane</rdfs:label>
+    <rdfs:comment>Dissolved fault gas: Methane.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#Gas"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#ThermalFaultHigh">
+    <rdfs:label>Thermal fault, t &gt; 700 °C</rdfs:label>
+    <rdfs:comment>Thermal fault, t &gt; 700 °C</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#Fault"/>
+    <faultCode>T3</faultCode>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="http://test.org/onto-pw#hasSymptom">
+    <rdfs:label>has symptom</rdfs:label>
+    <rdfs:comment>Links an asset to an observed symptom.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://test.org/onto-pw#Asset"/>
+    <rdfs:range rdf:resource="http://test.org/onto-pw#Symptom"/>
+  </owl:ObjectProperty>
+  <owl:Class rdf:about="http://test.org/onto-pw#Dielectric_rigidity">
+    <rdfs:label>Dielectric rigidity</rdfs:label>
+    <rdfs:comment>Measured property: Dielectric rigidity.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#MeasuredProperty"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="http://test.org/onto-pw#relatesWaterContentToMeasurement">
+    <rdfs:label>relates water content to measurement</rdfs:label>
+    <rdfs:comment>Links a water-content property to its measurement.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://test.org/onto-pw#Water_content"/>
+    <rdfs:range rdf:resource="http://test.org/onto-pw#Measurement"/>
+  </owl:ObjectProperty>
+  <owl:Class rdf:about="http://test.org/onto-pw#Component">
+    <rdfs:label>Component</rdfs:label>
+    <rdfs:comment>A constituent component of an asset.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#Asset"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#Diagnosis">
+    <rdfs:label>Diagnosis</rdfs:label>
+    <rdfs:comment>An inferred diagnostic conclusion for an asset, with explanation trace.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#Symptom">
+    <rdfs:label>Symptom</rdfs:label>
+    <rdfs:comment>An observable abnormal condition derived from measurements.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#Cause">
+    <rdfs:label>Cause</rdfs:label>
+    <rdfs:comment>A root cause that explains one or more faults.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#Water_content">
+    <rdfs:label>Water content</rdfs:label>
+    <rdfs:comment>Measured property: Water content.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#MeasuredProperty"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#Fault">
+    <rdfs:label>Fault</rdfs:label>
+    <rdfs:comment>An incipient or active fault condition affecting an asset.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#MeasuredProperty">
+    <rdfs:label>Measured property</rdfs:label>
+    <rdfs:comment>A monitored physical/chemical property that a measurement observes.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#MaintenanceAction">
+    <rdfs:label>Maintenance action</rdfs:label>
+    <rdfs:comment>A recommended maintenance or inspection action.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#Measurement">
+    <rdfs:label>Measurement</rdfs:label>
+    <rdfs:comment>An observed quantitative value for a monitored parameter.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#Transformer">
+    <rdfs:label>Transformer</rdfs:label>
+    <rdfs:comment>A high-voltage power transformer (specialisation of Asset).</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#Asset"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#Asset">
+    <rdfs:label>Asset</rdfs:label>
+    <rdfs:comment>A physical industrial asset under diagnosis.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#Gas">
+    <rdfs:label>Gas</rdfs:label>
+    <rdfs:comment>A fault gas dissolved in transformer oil.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://test.org/onto-pw#MeasuredProperty"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#DiagnosticRule">
+    <rdfs:label>Diagnostic rule</rdfs:label>
+    <rdfs:comment>A documented rule whose application produces diagnoses.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#Effect">
+    <rdfs:label>Effect</rdfs:label>
+    <rdfs:comment>A consequence or effect produced by a fault.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://test.org/onto-pw#Evidence">
+    <rdfs:label>Evidence</rdfs:label>
+    <rdfs:comment>An auditable piece of evidence (parameter, value, threshold) for a rule.</rdfs:comment>
+  </owl:Class>
 </rdf:RDF>

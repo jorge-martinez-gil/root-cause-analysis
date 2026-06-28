@@ -4,21 +4,36 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "root-cause-analysis"
-version = "0.1.0"
-description = "Knowledge graph-driven root cause analysis workflows for power transformer diagnostics."
+version = "0.2.0"
+description = "Explainable, knowledge-graph-based root cause analysis for industrial power-transformer fault diagnosis (IEC 60599 / IEEE C57.104, OWL/RDF, SPARQL, PROV-O)."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
 authors = [{ name = "Jorge Martinez-Gil et al." }]
-keywords = ["knowledge-graph", "root-cause-analysis", "power-transformers", "ontology"]
+keywords = [
+  "knowledge-graph",
+  "root-cause-analysis",
+  "predictive-maintenance",
+  "fault-diagnosis",
+  "power-transformers",
+  "ontology",
+  "explainable-ai",
+  "dissolved-gas-analysis",
+  "iec-60599",
+  "sparql",
+  "rdf",
+  "owl",
+  "prov-o",
+]
 classifiers = [
-  "Development Status :: 3 - Alpha",
+  "Development Status :: 4 - Beta",
   "Intended Audience :: Science/Research",
   "License :: OSI Approved :: MIT License",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
   "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
 dependencies = [
@@ -36,9 +51,16 @@ reasoner = [
   "owlready2>=0.46,<0.47",
 ]
 
+[project.urls]
+Homepage = "https://github.com/jorge-martinez-gil/root-cause-analysis"
+Repository = "https://github.com/jorge-martinez-gil/root-cause-analysis"
+Publication = "https://doi.org/10.1016/j.procs.2022.01.304"
+
 [project.scripts]
+rca-diagnose = "root_cause_analysis.cli:run_diagnosis_cli"
 rca-classify = "root_cause_analysis.cli:run_classification_cli"
 rca-query = "root_cause_analysis.cli:run_query_cli"
+rca-build-ontology = "root_cause_analysis.cli:run_build_ontology_cli"
 
 [tool.setuptools]
 package-dir = { "" = "src" }
